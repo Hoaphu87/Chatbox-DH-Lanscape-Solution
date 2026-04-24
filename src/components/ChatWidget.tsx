@@ -14,7 +14,7 @@ interface Message {
 }
 
 export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [sessionId] = useState(() => Math.random().toString(36).substring(7));
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', role: 'model', text: "Hi! I'm Assistant Darrell. How can I help with your yard today?" }
@@ -106,22 +106,7 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Button */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.button
-            id="chat-trigger"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 w-16 h-16 bg-[#2d5a27] rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer z-50 hover:bg-[#1e3d1a] transition-all"
-          >
-            <MessageSquare size={32} fill="currentColor" />
-          </motion.button>
-        )}
-      </AnimatePresence>
-
+      
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
