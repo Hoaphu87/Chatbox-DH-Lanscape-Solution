@@ -21,7 +21,9 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     'Regular Maintenance',
     'Lawn Mowing',
     'Cleanup',
-    'Tree/Shrub Care'
+    'Tree/Shrub Care',
+    'Soil & Installation',
+    'Bark Mulch'
   ];
 
   const handleServiceChange = (service: string) => {

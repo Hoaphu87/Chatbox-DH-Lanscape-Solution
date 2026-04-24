@@ -14,7 +14,7 @@ interface Message {
 }
 
 export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [sessionId] = useState(() => Math.random().toString(36).substring(7));
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', role: 'model', text: "Hi! I'm Assistant Darrell. How can I help with your yard today?" }
@@ -71,7 +71,7 @@ export default function ChatWidget() {
   };
 
   const startBooking = () => {
-    const text = "I'd like to book a Free Landscape Consultation!";
+    const text = "I'd like to book a Landscape Consultation!";
     const userMsg: Message = { id: Date.now().toString(), role: 'user', text };
     setMessages(prev => [...prev, userMsg]);
     setIsTyping(true);
@@ -79,7 +79,7 @@ export default function ChatWidget() {
     saveMessageToFirestore('user', text);
     
     setTimeout(() => {
-      const response = "Excellent! To get things moving, please share your address and a phone number. Darrell will contact you as soon as he receives your information to set a time.";
+      const response = "Excellent! To get things moving, please share your address and a phone number. Darrell will contact you to set a time or discuss a free online quote via photos.";
       const botMsg: Message = { 
         id: (Date.now() + 1).toString(), 
         role: 'model', 
@@ -106,7 +106,22 @@ export default function ChatWidget() {
 
   return (
     <>
-      
+      {/* Floating Button */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            id="chat-trigger"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed bottom-6 right-6 w-16 h-16 bg-[#2d5a27] rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer z-50 hover:bg-[#1e3d1a] transition-all"
+          >
+            <MessageSquare size={32} fill="currentColor" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -126,7 +141,12 @@ export default function ChatWidget() {
                   <p className="text-[10px] opacity-80">Expert Garden Help</p>
                 </div>
               </div>
-              
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="p-1 hover:bg-black/10 rounded-full"
+              >
+                <X size={20} />
+              </button>
             </div>
 
             {/* Messages */}
@@ -162,12 +182,12 @@ export default function ChatWidget() {
                   onClick={startBooking}
                   className="w-full bg-[#2d5a27] text-white py-2 rounded-lg text-sm font-semibold hover:bg-[#1e3d1a] transition-colors"
                 >
-                  Book Free Consultation
+                  Book Consultation
                 </button>
               )}
               <div className="flex gap-2">
                 <a 
-                  href="tel:+17783863334" 
+                  href="tel:+16049297335" 
                   className="flex items-center gap-2 px-6 py-2 border-2 border-[#2d5a27] text-[#2d5a27] rounded-full text-xs font-bold hover:bg-[#ebf0ea] transition-colors"
                 >
                   <Phone size={14} /> Call
