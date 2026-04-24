@@ -167,7 +167,7 @@ export default function ChatWidget() {
               )}
               <div className="flex gap-2">
                 <a 
-                  href="tel:+16049297335" 
+                  href="tel:+17783863334" 
                   className="flex items-center gap-2 px-6 py-2 border-2 border-[#2d5a27] text-[#2d5a27] rounded-full text-xs font-bold hover:bg-[#ebf0ea] transition-colors"
                 >
                   <Phone size={14} /> Call
