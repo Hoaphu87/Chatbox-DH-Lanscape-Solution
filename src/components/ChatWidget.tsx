@@ -126,12 +126,7 @@ export default function ChatWidget() {
                   <p className="text-[10px] opacity-80">Expert Garden Help</p>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-black/10 rounded-full"
-              >
-                <X size={20} />
-              </button>
+              
             </div>
 
             {/* Messages */}
