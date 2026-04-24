@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Customer Lead",
+      "description": "Information collected from the landscape consultation form",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "address": { "type": "string" },
+        "services": { 
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "phone", "address", "createdAt"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "A single message in a chat history",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["sessionId", "role", "text", "createdAt"]
+    },
+    "Admin": {
+      "title": "Admin User",
+      "description": "Users with administrative access to view leads",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of customer leads from the website form"
+    },
+    "sessions/{sessionId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Chat messages for specific sessions"
+    },
+    "admins/{userId}": {
+      "schema": "Admin",
+      "description": "Whitelisted administrator accounts"
+    }
+  }
+}
